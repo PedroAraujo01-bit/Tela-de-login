@@ -1,0 +1,131 @@
+/* Reset basico e configuracoes globais. */
+* {
+    margin:0;
+    padding: 0;
+    box-sizing:border-box;
+}
+/* Define a base visual da pagina e centraliza o conteudo no viewport. */
+body {
+    min-height: 100dvh; /* Usa a altura dinamica da tela, mais estavel em navegadores modernos. */
+    display: grid;
+    place-items: center;
+    font-family: "Anta", Arial, sans-serif;
+    color: #fff;
+    background-color: #5b5c5e;
+}
+/* Area principal: centraliza o card e cria referencia para o fundo animado. */
+.login-page {
+    position: relative; /* Serve de referencia para posicionar o circulo animado. */
+    width:100%;
+    min-height: 100dvh;
+    display: grid;
+    place-items: center;
+    padding: 24px;
+    overflow: hidden;/* Impede que partes grandes do circulo escapem da area visivel. */
+    isolation: isolate;/* Cria um contexto de empilhamento mais previsivel para o z-index. */
+}
+
+/* Camada decorativa do circulo neon posicionada atras do card. */
+.background-loader {
+    position: absolute;
+    width: 380px;
+    height: 380px;
+    border-radius: 50%;
+    overflow: hidden;
+    z-index: -1;
+    box-shadow: 
+        0 0 40px rgb(0 234 255 / 35%),
+        0 0 100px rgb(0 119 255 / 25%);
+}
+
+/* Mascara central que transforma o gradiente em um anel. */
+.background-loader::before {
+    content: "";
+    position: absolute;
+    inset: 50px;/* Quanto maior o inset, maior o espaco vazio no centro do circulo. */
+    border-radius: 50%;
+    background: #101018;
+    z-index: 2;
+}
+
+/* Camada do gradiente que gira e cria o brilho colorido do circulo. */
+.background-loader span {
+    position:absolute;
+    inset: -40px;
+    border-radius: 50%;
+    /* Gradiente circular usado para formar a trilha luminosa. */
+    background: conic-gradient(
+        from 0deg,
+        transparent,
+        #00eaff,
+        #ffffff,
+        #0077ff,
+        transparent
+    );
+    filter: blur(22px);/* Suaviza o gradiente e reforca o efeito neon. */
+    animation: spin 4s linear infinite;/* Mantem o circulo girando em velocidade constante. */
+}
+
+/* Organiza os campos do formulario em coluna sem usar quebras de linha no HTML. */
+.login-card form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;/* Controla o espaco entre labels, inputs e botao. */
+    margin-top: 24px;
+}
+
+.login-card label {
+    font-size: 0.95rem;
+}
+
+.login-card input {
+    width: 100%;
+    padding: 14px 16px;
+    border: 1px solid rgb(225 255 255 / 30%);
+    border-radius: 10px;
+    background: rgb(255 255 255 / 14%);
+    color: #fff;
+    font-size: 1rem;
+    outline: none;
+}
+
+.login-card button {
+    margin-top: 12px;
+    padding: 14px 16px;
+    border: none;
+    border-radius: 10px;
+    background: #00eaff;
+    color: #071018;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.login-card {
+    width: min(100%, 430px);/* Define largura maxima mantendo adaptacao para telas pequenas. */
+    padding: 40px;/* Controla o espaco interno entre a borda do card e o conteudo. */
+    border: 1px solid rgb(255 255 255 / 30%);/* Borda translucida que reforca o efeito de vidro. */
+    border-radius: 18px;
+    background: rgb(255 255 255 / 14%);/* Fundo translucido necessario para o glassmorphism. */
+    box-shadow: 0 24px 80px rgb(0 0 0 / 35%);/* Cria profundidade e separa o card do fundo. */
+    backdrop-filter: blur(18px);/* Desfoca o que estiver atras do card. */
+    -webkit-backdrop-filter: blur(18px);
+    animation: cardEnter 700ms ease-out;
+}
+
+/* Animacao de entrada do card ao carregar a pagina. */
+@keyframes cardEnter {
+    from {
+        opacity: 0; /* Comeca invisivel. */
+        transform: scale(0.85) translateY(24px);
+    }
+    to {
+        opacity: 1;/* Termina visivel. */
+        transform: scale(1) translateY(0);
+    }
+}
+/* Rotacao continua usada pelo circulo neon de fundo. */
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
