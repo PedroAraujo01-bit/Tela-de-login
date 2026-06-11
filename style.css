@@ -11,7 +11,7 @@ body {
     place-items: center;
     font-family: "Anta", Arial, sans-serif;
     color: #fff;
-    background-color: #5b5c5e;
+    background-image: linear-gradient(to top, #041d63f5, #2b3ff79a);
 }
 /* Area principal: centraliza o card e cria referencia para o fundo animado. */
 .login-page {
@@ -28,14 +28,14 @@ body {
 /* Camada decorativa do circulo neon posicionada atras do card. */
 .background-loader {
     position: absolute;
-    width: 380px;
-    height: 380px;
+    width: 370px;
+    height: 370px;
     border-radius: 50%;
     overflow: hidden;
     z-index: -1;
     box-shadow: 
-        0 0 40px rgb(0 234 255 / 35%),
-        0 0 100px rgb(0 119 255 / 25%);
+        0 0 40px #2f00ff,
+        0 0 100px #0051fffb;
 }
 
 /* Mascara central que transforma o gradiente em um anel. */
@@ -44,7 +44,7 @@ body {
     position: absolute;
     inset: 50px;/* Quanto maior o inset, maior o espaco vazio no centro do circulo. */
     border-radius: 50%;
-    background: #101018;
+    background: #022483;
     z-index: 2;
 }
 
@@ -57,9 +57,9 @@ body {
     background: conic-gradient(
         from 0deg,
         transparent,
-        #00eaff,
-        #ffffff,
-        #0077ff,
+        #00eeff,
+        #a8eef3,
+        #0051ff75,
         transparent
     );
     filter: blur(22px);/* Suaviza o gradiente e reforca o efeito neon. */
@@ -78,15 +78,50 @@ body {
     font-size: 0.95rem;
 }
 
+
+/*Container para alinhar o input e o label um em cima do outro*/
+.input-group {
+    position: relative;
+    margin-bottom: 24px;
+    width: 100%;
+}
+/*Estilização inicial do input (modo linha)*/
 .login-card input {
     width: 100%;
-    padding: 14px 16px;
-    border: 1px solid rgb(225 255 255 / 30%);
-    border-radius: 10px;
-    background: rgb(255 255 255 / 14%);
+    padding: 14px 4px;/*Ajustando o padding lateral para alinhar com a linha*/
+    background: transparent;/*Remove o fundo branco antigo*/
     color: #fff;
     font-size: 1rem;
     outline: none;
+    border: none;/*Remove todas as bordas e deixa apenas a linha de baixo*/
+    border-bottom: 2px solid #ffffff4d;
+    border-radius: 0; /*Remove os cantos arredondados do padrao antigo*/
+    transition: border-color 0.3s ease;
+}
+
+/*Quando o usuario clica no input, a linha acende em neon*/
+.login-card input:focus {
+    border-bottom-color: #00eaff;
+}
+
+/*Posicionamento inicial do label Dentro do campo de digitação*/
+.input-group label {
+    position: absolute;
+    left: 4px;
+    top: 14px;/*Alinha exatamente onde o texto digitado ficaria*/
+    color: #ffffffd5;
+    font-size: 1rem;
+    pointer-events: none;/*Garante que se o usuario clicar na palavra, o clique passe para input*/
+    /*A propriedade chave controla a suavidade do movimento e do redimensionamento*/
+    transition: transform 0.3s ease, font-size 0.3s ease, color 0.3s ease;
+    transform-origin: left top;
+}
+
+/*Quando o input ganha foco ou quando o texto já foi digitado*/
+.login-card input:focus ~ label,
+.login-card input:not(:placeholder-shown) ~ label {
+    transform: translateY(-24px) scale(0.85);/*Sobe o texto em 24px e diminui ele um pouco*/
+    color: #00eaff;/*Deixa o label na cor do neon ativo*/
 }
 
 .login-card button {
@@ -98,15 +133,31 @@ body {
     color: #071018;
     font-weight: 700;
     cursor: pointer;
+    
+}
+/*Botao hover*/
+.login-card button:hover{
+    background-color: #00bcd4;
+    box-shadow: 0 8px 20px rgb(0 234 255 / 40%);
+}
+/*Acessibilidade para teclado utilizando o tab*/
+.login-card button:focus-visible{
+    outline: 3px solid #ffff;
+    outline-offset: 2px;
 }
 
+.login-card button:active {
+    transform: translateY(0); /* O botão "desce" de volta, simulando um clique mecânico real */
+    box-shadow: 0 4px 10px rgb(0 234 255 / 30%); /* Diminui a sombra para acompanhar a descida */
+
+}
 .login-card {
     width: min(100%, 430px);/* Define largura maxima mantendo adaptacao para telas pequenas. */
     padding: 40px;/* Controla o espaco interno entre a borda do card e o conteudo. */
-    border: 1px solid rgb(255 255 255 / 30%);/* Borda translucida que reforca o efeito de vidro. */
+    border: 1px solid #ffffff4d;/* Borda translucida que reforca o efeito de vidro. */
     border-radius: 18px;
-    background: rgb(255 255 255 / 14%);/* Fundo translucido necessario para o glassmorphism. */
-    box-shadow: 0 24px 80px rgb(0 0 0 / 35%);/* Cria profundidade e separa o card do fundo. */
+    background: #ffffff24;/* Fundo translucido necessario para o glassmorphism. */
+    box-shadow: 0 24px 80px #00000059;/* Cria profundidade e separa o card do fundo. */
     backdrop-filter: blur(18px);/* Desfoca o que estiver atras do card. */
     -webkit-backdrop-filter: blur(18px);
     animation: cardEnter 700ms ease-out;
