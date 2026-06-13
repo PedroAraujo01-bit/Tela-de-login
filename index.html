@@ -8,6 +8,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Anta&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
 </head>
 <body>
     <!-- Container principal da tela de login. -->
@@ -20,7 +21,7 @@
         <section class="login-card">
             <h1>Entrar</h1>
             <!-- Formulario com os campos necessarios para autenticar o usuario. -->
-            <form>
+            <form id="form-login">
                 <!-- Labels e inputs trabalham juntos: o label identifica o campo e o input coleta o dado. -->
                  <div class="input-group">
                     <input type="email" id="email" name="email" autocomplete="email" placeholder="" required>
@@ -31,6 +32,7 @@
                     <input type="password" id="password" name="password" autocomplete="current-password" placeholder="" required>
                     <label for="password">Senha:</label>
                 </div>
+                <p id="mensagem-erro" class="mensagem-erro"></p>
                 <button type="submit">Acessar</button> 
             </form>
         </section>

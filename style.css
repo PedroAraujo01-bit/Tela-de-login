@@ -163,6 +163,22 @@ body {
     animation: cardEnter 700ms ease-out;
 }
 
+/*Estilo da mensagem de erro*/
+.mensagem-erro {
+    color: #ff4d4d;
+    font-size: 0.85rem;
+    text-align: center;
+    margin-top: -10px;
+    margin-bottom: 10px;
+    min-height: 20px; /*mantem o espaço reservado para não empurrar o botao para baixo*/
+    opacity: 0;/*começa invisivel*/
+    transition: opacity 0.3s ease;
+}
+/*Classe que o JavaScript vai adicionar quando houver erro*/
+.mensagem-erro.mostrar {
+    opacity: 1;
+}
+
 /* Animacao de entrada do card ao carregar a pagina. */
 @keyframes cardEnter {
     from {
@@ -179,4 +195,13 @@ body {
     to {
         transform: rotate(360deg);
     }
+}
+
+/*Responsividade para o celular diminuindo o tamanho do circulo*/
+@media (max-width:600px) {
+        .background-loader{
+                width: 270px;
+                height: 270px;
+        }  
+        
 }
